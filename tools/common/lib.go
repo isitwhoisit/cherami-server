@@ -227,8 +227,8 @@ func getChecksumOptionParam(optionStr string) cherami.ChecksumOption {
 	return cherami.ChecksumOption_CRC32IEEE
 }
 
-// CreateDestination create destination
-func CreateDestination(c *cli.Context, cClient ccli.Client, cliHelper common.CliHelper) {
+// CreateDestinationHelper create destination
+func CreateDestinationHelper(c *cli.Context, cClient ccli.Client, cliHelper common.CliHelper) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -331,8 +331,8 @@ func getDestZoneConfigs(c *cli.Context, cliHelper common.CliHelper) cherami.Dest
 	return zoneConfigs
 }
 
-// UpdateDestination update destination based on cli
-func UpdateDestination(c *cli.Context, cClient ccli.Client, mClient mcli.Client, cliHelper common.CliHelper) {
+// UpdateDestinationHelper update destination based on cli
+func UpdateDestinationHelper(c *cli.Context, cClient ccli.Client, mClient mcli.Client, cliHelper common.CliHelper) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -398,8 +398,8 @@ func UpdateDestination(c *cli.Context, cClient ccli.Client, mClient mcli.Client,
 	fmt.Printf("%v\n", Jsonify(desc))
 }
 
-// CreateConsumerGroup create consumer group based on cli.Context
-func CreateConsumerGroup(c *cli.Context, cClient ccli.Client, mClient mcli.Client, cliHelper common.CliHelper) {
+// CreateConsumerGroupHelper create consumer group based on cli.Context
+func CreateConsumerGroupHelper(c *cli.Context, cClient ccli.Client, mClient mcli.Client, cliHelper common.CliHelper) {
 	if len(c.Args()) < 2 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -516,8 +516,8 @@ func getCgZoneConfigs(c *cli.Context, mClient mcli.Client, cliHelper common.CliH
 	return zoneConfigs
 }
 
-// UpdateConsumerGroup update the consumer group based on cli.Context
-func UpdateConsumerGroup(c *cli.Context, cClient ccli.Client, mClient mcli.Client, cliHelper common.CliHelper) {
+// UpdateConsumerGroupHelper update the consumer group based on cli.Context
+func UpdateConsumerGroupHelper(c *cli.Context, cClient ccli.Client, mClient mcli.Client, cliHelper common.CliHelper) {
 
 	var path, name string
 
@@ -843,8 +843,8 @@ func printDest(dest *shared.DestinationDescription) {
 	fmt.Fprintln(os.Stdout, string(outputStr))
 }
 
-// ReadDestination return the detail for dest, and also consumer group for this dest
-func ReadDestination(c *cli.Context, mClient mcli.Client) {
+// ReadDestinationHelper return the detail for dest, and also consumer group for this dest
+func ReadDestinationHelper(c *cli.Context, mClient mcli.Client) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -895,8 +895,8 @@ func readDestinationFromMetadata(mClient mcli.Client, path string) (*shared.Dest
 	})
 }
 
-// ReadDlq return the info for dlq dest and related consumer group
-func ReadDlq(c *cli.Context, mClient mcli.Client) {
+// ReadDlqHelper return the info for dlq dest and related consumer group
+func ReadDlqHelper(c *cli.Context, mClient mcli.Client) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -921,8 +921,8 @@ func ReadDlq(c *cli.Context, mClient mcli.Client) {
 	printCG(resp)
 }
 
-// ReadCgBacklog reads the CG back log
-func ReadCgBacklog(c *cli.Context, cClient ccli.Client) {
+// ReadCgBacklogHelper reads the CG back log
+func ReadCgBacklogHelper(c *cli.Context, cClient ccli.Client) {
 	var cg, dst string
 	var dstPtr *string
 	if len(c.Args()) < 1 {
@@ -955,8 +955,8 @@ func ReadCgBacklog(c *cli.Context, cClient ccli.Client) {
 	fmt.Println(backlog.GetValue())
 }
 
-// DeleteDestination delete the destination based on Cli.Context
-func DeleteDestination(c *cli.Context, cClient ccli.Client) {
+// DeleteDestinationHelper delete the destination based on Cli.Context
+func DeleteDestinationHelper(c *cli.Context, cClient ccli.Client) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -968,8 +968,8 @@ func DeleteDestination(c *cli.Context, cClient ccli.Client) {
 	ExitIfError(err)
 }
 
-// DeleteConsumerGroup delete the consumer group based on Cli.Context
-func DeleteConsumerGroup(c *cli.Context, cClient ccli.Client) {
+// DeleteConsumerGroupHelper delete the consumer group based on Cli.Context
+func DeleteConsumerGroupHelper(c *cli.Context, cClient ccli.Client) {
 	if len(c.Args()) < 2 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -1022,8 +1022,8 @@ func printCG(cg *shared.ConsumerGroupDescription) {
 	fmt.Fprintln(os.Stdout, string(outputStr))
 }
 
-// ReadConsumerGroup return the consumer group information
-func ReadConsumerGroup(c *cli.Context, mClient mcli.Client) {
+// ReadConsumerGroupHelper return the consumer group information
+func ReadConsumerGroupHelper(c *cli.Context, mClient mcli.Client) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strCGSpecIncorrectArgs))
 	}
@@ -1051,8 +1051,8 @@ func ReadConsumerGroup(c *cli.Context, mClient mcli.Client) {
 	}
 }
 
-// MergeDLQForConsumerGroup return the consumer group information
-func MergeDLQForConsumerGroup(c *cli.Context, cClient ccli.Client) {
+// MergeDLQForConsumerGroupHelper return the consumer group information
+func MergeDLQForConsumerGroupHelper(c *cli.Context, cClient ccli.Client) {
 	var err error
 	switch len(c.Args()) {
 	default:
@@ -1074,8 +1074,8 @@ func MergeDLQForConsumerGroup(c *cli.Context, cClient ccli.Client) {
 	ExitIfError(err)
 }
 
-// PurgeDLQForConsumerGroup return the consumer group information
-func PurgeDLQForConsumerGroup(c *cli.Context, cClient ccli.Client) {
+// PurgeDLQForConsumerGroupHelper return the consumer group information
+func PurgeDLQForConsumerGroupHelper(c *cli.Context, cClient ccli.Client) {
 	var err error
 	switch len(c.Args()) {
 	default:
@@ -1131,8 +1131,8 @@ func matchDestStatus(status string, wantStatus shared.DestinationStatus) bool {
 	return false
 }
 
-// ReadMessage implement for show msg command line
-func ReadMessage(c *cli.Context, mClient mcli.Client) {
+// ReadMessageHelper implement for show msg command line
+func ReadMessageHelper(c *cli.Context, mClient mcli.Client) {
 	if len(c.Args()) < 2 {
 		ExitIfError(errors.New("not enough arguments, need to specify both extent uuid and message address"))
 	}
@@ -1198,8 +1198,8 @@ type messageJSONOutputFields struct {
 	EnqueueTimeUtc time.Time `json:"enqueueTimeUtc,omitempty"`
 }
 
-// ListDestinations return destinations based on the Cli.Context
-func ListDestinations(c *cli.Context, mClient mcli.Client) {
+// ListDestinationsHelper return destinations based on the Cli.Context
+func ListDestinationsHelper(c *cli.Context, mClient mcli.Client) {
 
 	prefix := string(c.String("prefix"))
 	included := string(c.String("include"))
@@ -1303,8 +1303,8 @@ func ListDestinations(c *cli.Context, mClient mcli.Client) {
 	}
 }
 
-// ListConsumerGroups return the consumer groups based on the destination provided
-func ListConsumerGroups(c *cli.Context, cClient ccli.Client) {
+// ListConsumerGroupsHelper return the consumer groups based on the destination provided
+func ListConsumerGroupsHelper(c *cli.Context, cClient ccli.Client) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -1336,8 +1336,8 @@ func ListConsumerGroups(c *cli.Context, cClient ccli.Client) {
 	}
 }
 
-// Publish start to pusblish to the destination provided
-func Publish(c *cli.Context, cClient ccli.Client) {
+// PublishHelper start to pusblish to the destination provided
+func PublishHelper(c *cli.Context, cClient ccli.Client) {
 	if len(c.Args()) < 1 {
 		ExitIfError(errors.New(strNotEnoughArgs))
 	}
@@ -1410,8 +1410,8 @@ type kafkaMessageJSON struct {
 	Msg         string
 }
 
-// Consume start to consume from the destination
-func Consume(c *cli.Context, cClient ccli.Client) {
+// ConsumeHelper start to consume from the destination
+func ConsumeHelper(c *cli.Context, cClient ccli.Client) {
 	var err error
 	if len(c.Args()) < 2 {
 		ExitIfError(errors.New(strNotEnoughArgs))
@@ -1987,4 +1987,129 @@ func StoreListExtents(c *cli.Context, mClient mcli.Client) {
 		outputStr, _ := json.Marshal(output)
 		fmt.Fprintln(os.Stdout, string(outputStr))
 	}
+}
+
+// CreateDestination creates a destination
+func CreateDestination(c *cli.Context, cliHelper common.CliHelper, serviceName string) {
+	CreateDestinationSecure(c, cliHelper, nil, serviceName)
+}
+
+// CreateDestinationSecure creates a destination with security enabled
+func CreateDestinationSecure(
+	c *cli.Context,
+	cliHelper common.CliHelper,
+	authProvider ccli.AuthProvider,
+	serviceName string,
+) {
+	cClient := GetCClientSecure(c, serviceName, authProvider)
+	CreateDestinationHelper(c, cClient, cliHelper)
+}
+
+// CreateConsumerGroup creates the CG
+func CreateConsumerGroup(c *cli.Context, cliHelper common.CliHelper, serviceName string) {
+	CreateConsumerGroupSecure(c, cliHelper, nil, serviceName)
+}
+
+// CreateConsumerGroupSecure creates the CG with security enabled
+func CreateConsumerGroupSecure(
+	c *cli.Context,
+	cliHelper common.CliHelper,
+	authProvider ccli.AuthProvider,
+	serviceName string,
+) {
+	mClient := GetMClient(c, serviceName)
+	cClient := GetCClientSecure(c, serviceName, authProvider)
+	CreateConsumerGroupHelper(c, cClient, mClient, cliHelper)
+}
+
+// ReadDestination is used to get info about the destination
+func ReadDestination(c *cli.Context, serviceName string) {
+	mClient := GetMClient(c, serviceName)
+	ReadDestinationHelper(c, mClient)
+}
+
+// ReadConsumerGroup gets info about the CG
+func ReadConsumerGroup(c *cli.Context, serviceName string) {
+	mClient := GetMClient(c, serviceName)
+	ReadConsumerGroupHelper(c, mClient)
+}
+
+// ReadMessage is used to read a message
+func ReadMessage(c *cli.Context, serviceName string) {
+	mClient := GetMClient(c, serviceName)
+	ReadMessageHelper(c, mClient)
+}
+
+// ReadDlq is used to get info about the DLQ destination
+func ReadDlq(c *cli.Context, serviceName string) {
+	mClient := GetMClient(c, serviceName)
+	ReadDlqHelper(c, mClient)
+}
+
+// ReadCgBacklog reads cg backlog
+func ReadCgBacklog(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	ReadCgBacklogHelper(c, cClient)
+}
+
+// UpdateDestination updates the destination
+func UpdateDestination(c *cli.Context, cliHelper common.CliHelper, serviceName string) {
+	mClient := GetMClient(c, serviceName)
+	cClient := GetCClient(c, serviceName)
+	UpdateDestinationHelper(c, cClient, mClient, cliHelper)
+}
+
+// UpdateConsumerGroup updates the CG
+func UpdateConsumerGroup(c *cli.Context, cliHelper common.CliHelper, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	mClient := GetMClient(c, serviceName)
+	UpdateConsumerGroupHelper(c, cClient, mClient, cliHelper)
+}
+
+// DeleteDestination deletes the given destination
+func DeleteDestination(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	DeleteDestinationHelper(c, cClient)
+}
+
+// DeleteConsumerGroup deletes the given CG
+func DeleteConsumerGroup(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	DeleteConsumerGroupHelper(c, cClient)
+}
+
+// ListDestinations is used to list all destinations
+func ListDestinations(c *cli.Context, serviceName string) {
+	mClient := GetMClient(c, serviceName)
+	ListDestinationsHelper(c, mClient)
+}
+
+// ListConsumerGroups is used to list all CGs
+func ListConsumerGroups(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	ListConsumerGroupsHelper(c, cClient)
+}
+
+// Publish is used to publish to a given destination
+func Publish(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	PublishHelper(c, cClient)
+}
+
+// Consume is used to consume from the given destination for the given CG
+func Consume(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	ConsumeHelper(c, cClient)
+}
+
+// MergeDLQForConsumerGroup merges the DLQ for this CG
+func MergeDLQForConsumerGroup(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	MergeDLQForConsumerGroupHelper(c, cClient)
+}
+
+// PurgeDLQForConsumerGroup purges the DLQ for this CG
+func PurgeDLQForConsumerGroup(c *cli.Context, serviceName string) {
+	cClient := GetCClient(c, serviceName)
+	PurgeDLQForConsumerGroupHelper(c, cClient)
 }
